@@ -1,0 +1,87 @@
+【手Q】Mac QQ 公证
+mellowxu  2019年10月25日 11:32  浏览(37)  收藏(2)  评论(1)  
+分享
+背景
+macOS 10.15 Catalina 起，对非 App Store 渠道的官网包需要进行公证：Notarizing Your App Before Distribution。
+
+
+环境
+全程在 Tencent-StaffWiFi 下进行
+
+上传安装包进行公证
+先下载从 RDM 打包的 Mac QQ 官网包(Developer 证书)，然后上传到苹果验证服务器。
+
+xcrun altool --notarize-app --primary-bundle-id "com.tencent.qq" --username "xxxx@tencent.com" --password "xxxx-xxxx-xxxx-xxxx" --file QQ_6.5.6.dmg
+ 几分钟后，返回用于查询的 RequestUUID = b7e46b7e-fe8a-4475-8ec4-685beca16d9f
+
+No errors uploading '/Users/mellow/Downloads/QQ_6.5.6.dmg'.
+RequestUUID = b7e46b7e-fe8a-4475-8ec4-685beca16d9f
+ 
+
+查询公证状态
+再过几分钟后，使用 RequestUUID 查询公证状态
+
+xcrun altool --notarization-info b7e46b7e-fe8a-4475-8ec4-685beca16d9f -u "xxxx@tencent.com" -p "xxxx-xxxx-xxxx-xxxx"
+ 还在公证中：
+
+No errors getting notarization info.
+
+       Date: 2019-10-25 02:26:06 +0000
+       Hash: 8305ac0b2cee5f1758b561483eee8323e25ebdf222781f3c3c84b9f8f1063d4b
+RequestUUID: b7e46b7e-fe8a-4475-8ec4-685beca16d9f
+     Status: in progress
+公证成功：
+
+No errors getting notarization info.
+
+          Date: 2019-10-25 02:26:06 +0000
+          Hash: 8305ac0b2cee5f1758b561483eee8323e25ebdf222781f3c3c84b9f8f1063d4b
+    LogFileURL: https://osxapps-ssl.itunes.apple.com/itunes-assets/Enigma113/v4/ff/f9/a5/fff9a5da-0bb8-f802-7642-51019c1ef356/developer_log.json?accessKey=1572164996_5078282941151909145_52kpoSm8fD10dCd9acO%2BoFfyA6lcK8JyqSjVxcMKWxoBJIrNm%2F4bDVZWdqpmI%2BynrCOK%2FGykP5IcJ%2F1e39PqeBSGIXbWU7xObgrgqiYOIhiW5o%2Ft6dN%2FStZTMo5Wa8gRRkZKf8%2FvB6H1GIav4keFIUSE22EJOShdlFFYxRSlrIY%3D
+   RequestUUID: b7e46b7e-fe8a-4475-8ec4-685beca16d9f
+        Status: success
+   Status Code: 0
+Status Message: Package Approved
+如果 Status: invalid 失败，通过 LogFileURL 下载日志查看错误。
+
+即使公证成功，也要始终检查日志文件，因为该日志文件可能包含警告，您可以在下一次提交之前进行修复。
+
+给安装包打上公证信息
+公证成功完成后，下一次任何用户尝试在macOS 10.14或更高版本上运行您的应用程序时，Gatekeeper都会在线找到该票证（ticket）。其中包括在经过公证之前下载了您的应用的用户。
+
+为了离线状态下 Gatekeeper 仍然能够找到 ticket 信息，需要使用 stapler 工具给安装包打上 ticket。
+
+# 先 cd 到相关目录下
+xcrun stapler staple "QQ_6.5.6.dmg"
+ 结果：
+
+Processing: /Users/mellow/Downloads/QQ_6.5.6.dmg
+The staple and validate action worked!
+ 
+
+验证安装包是否有公证信息
+xcrun stapler validate QQ_6.5.6.dmg
+ 存在公证信息：
+
+Processing: /Users/mellow/Downloads/QQ_6.5.6.dmg
+The validate action worked!
+ 不存在公证信息：
+
+QQ_6.5.5.dmg does not have a ticket stapled to it.
+ 
+
+至此，Mac QQ 已经可以在 macOS 10.15 Catalina 上打开（正常提示）：
+
+
+
+如果没有公证（无法打开，这种情况仍然可以在 系统偏好设置-安全和隐私-仍然打开QQ）：
+
+
+
+参考
+Notarizing Your App Before Distribution
+
+Customizing the Notarization Workflow
+
+Mac端多扩展Electron应用打包公证流程
+
+小心你的app变非法 -- macOS应用需要苹果公证
