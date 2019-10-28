@@ -1,6 +1,5 @@
 【手Q】Mac QQ 公证
-mellowxu  2019年10月25日 11:32  浏览(37)  收藏(2)  评论(1)  
-分享
+
 背景
 macOS 10.15 Catalina 起，对非 App Store 渠道的官网包需要进行公证：Notarizing Your App Before Distribution。
 
