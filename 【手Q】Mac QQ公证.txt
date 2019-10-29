@@ -3,10 +3,6 @@
 背景
 macOS 10.15 Catalina 起，对非 App Store 渠道的官网包需要进行公证：Notarizing Your App Before Distribution。
 
-
-环境
-全程在 Tencent-StaffWiFi 下进行
-
 上传安装包进行公证
 先下载从 RDM 打包的 Mac QQ 官网包(Developer 证书)，然后上传到苹果验证服务器。
 
