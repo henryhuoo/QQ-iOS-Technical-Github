@@ -10,33 +10,33 @@ macOS 10.15 Catalina 起，对非 App Store 渠道的官网包需要进行公证
 上传安装包进行公证
 先下载从 RDM 打包的 Mac QQ 官网包(Developer 证书)，然后上传到苹果验证服务器。
 
-xcrun altool --notarize-app --primary-bundle-id "com.tencent.qq" --username "xxxx@tencent.com" --password "xxxx-xxxx-xxxx-xxxx" --file QQ_6.5.6.dmg
- 几分钟后，返回用于查询的 RequestUUID = b7e46b7e-fe8a-4475-8ec4-685beca16d9f
+xcrun altool --notarize-app --primary-bundle-id "com.xxx.xx" --username "xxxx@tencent.com" --password "xxxx-xxxx-xxxx-xxxx" --file QQ_6.5.6.dmg
+ 几分钟后，返回用于查询的 RequestUUID = xxxxx
 
-No errors uploading '/Users/mellow/Downloads/QQ_6.5.6.dmg'.
-RequestUUID = b7e46b7e-fe8a-4475-8ec4-685beca16d9f
+No errors uploading '/Users/xxxx/Downloads/QQ_6.5.6.dmg'.
+RequestUUID = xxxxx
  
 
 查询公证状态
 再过几分钟后，使用 RequestUUID 查询公证状态
 
-xcrun altool --notarization-info b7e46b7e-fe8a-4475-8ec4-685beca16d9f -u "xxxx@tencent.com" -p "xxxx-xxxx-xxxx-xxxx"
+xcrun altool --notarization-info xxxxx -u "xxxx@tencent.com" -p "xxxx-xxxx-xxxx-xxxx"
  还在公证中：
 
 No errors getting notarization info.
 
        Date: 2019-10-25 02:26:06 +0000
-       Hash: 8305ac0b2cee5f1758b561483eee8323e25ebdf222781f3c3c84b9f8f1063d4b
-RequestUUID: b7e46b7e-fe8a-4475-8ec4-685beca16d9f
+       Hash: xxxxx
+RequestUUID: xxxxx
      Status: in progress
 公证成功：
 
 No errors getting notarization info.
 
           Date: 2019-10-25 02:26:06 +0000
-          Hash: 8305ac0b2cee5f1758b561483eee8323e25ebdf222781f3c3c84b9f8f1063d4b
-    LogFileURL: https://osxapps-ssl.itunes.apple.com/itunes-assets/Enigma113/v4/ff/f9/a5/fff9a5da-0bb8-f802-7642-51019c1ef356/developer_log.json?accessKey=1572164996_5078282941151909145_52kpoSm8fD10dCd9acO%2BoFfyA6lcK8JyqSjVxcMKWxoBJIrNm%2F4bDVZWdqpmI%2BynrCOK%2FGykP5IcJ%2F1e39PqeBSGIXbWU7xObgrgqiYOIhiW5o%2Ft6dN%2FStZTMo5Wa8gRRkZKf8%2FvB6H1GIav4keFIUSE22EJOShdlFFYxRSlrIY%3D
-   RequestUUID: b7e46b7e-fe8a-4475-8ec4-685beca16d9f
+          Hash: xxxxxx
+    LogFileURL: xxxxxx
+   RequestUUID: xxxxxx
         Status: success
    Status Code: 0
 Status Message: Package Approved
@@ -53,7 +53,7 @@ Status Message: Package Approved
 xcrun stapler staple "QQ_6.5.6.dmg"
  结果：
 
-Processing: /Users/mellow/Downloads/QQ_6.5.6.dmg
+Processing: /Users/xxxx/Downloads/QQ_6.5.6.dmg
 The staple and validate action worked!
  
 
@@ -61,7 +61,7 @@ The staple and validate action worked!
 xcrun stapler validate QQ_6.5.6.dmg
  存在公证信息：
 
-Processing: /Users/mellow/Downloads/QQ_6.5.6.dmg
+Processing: /Users/xxxx/Downloads/QQ_6.5.6.dmg
 The validate action worked!
  不存在公证信息：
 
