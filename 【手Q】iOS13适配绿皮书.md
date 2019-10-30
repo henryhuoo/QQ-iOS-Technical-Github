@@ -7,6 +7,7 @@
 - 编译篇
 - UIKit篇
 - PhotoKit篇
+- Privacy篇
 - Crash篇
 
 前言
@@ -220,9 +221,14 @@ Sheet模式
 
 这里后续需持续关注苹果对于该接口的调整，一旦无法同步返回数据，可考虑通过信号量机制（dispatch_semaphore），封装异步转同步的接口向上层调用者提供。
 
-四、Crash篇
+四、Privacy篇
+![4.1](resource/4.1.png)
+
+https://developer.apple.com/videos/play/wwdc2019/708/
+
+五、Crash篇
 ====
-4.1 KVC访问私有属性
+5.1 KVC访问私有属性
 ----
 通过KVC获取或者修改私有成员变量的方式被限制使用，调用会直接crash，后续开发者须慎用该种方式。目前发现的案例包括：
 
@@ -233,7 +239,7 @@ UISearchBar的_searchField
 
     [_idEdit setValue:QQGLOBAL_COLOR(kTextFieldPlaceholderTextColor) forKeyPath:@"_placeholderLabel.textColor"];
 
-4.2 废弃API的强制禁用
+5.2 废弃API的强制禁用
 ----
 UISearchDisplayController被弃用，调用会直接crash。
 
@@ -241,7 +247,7 @@ MPMoviePlayerViewController被弃用，调用会直接crash。
 
 UIWebView被废弃，部分APP继续使用UIWebView时, 已有审核被拒的情况发生。
 
-4.3 系统控件使用方式的限制
+5.3 系统控件使用方式的限制
 ----
 
 ### 1、SKStoreViewController不再允许被继承
@@ -255,7 +261,7 @@ https://developer.apple.com/documentation/storekit/skstoreproductviewcontroller?
 
 由于SKStoreViewController的加载时间较长，影响广告业务的营收。因此，手Q的广告业务组件（七巧板）对其进行了继承封装（GdtAdSKStoreViewController），使该类支持了SkStore页面的预加载，以达到快速打开AppStore下载页的体验。但是，这种实现方式，在iOS13下便导致了crash。
 
-（2）适配方案
+### （2）适配方案
 
 ![5.3.2](resource/5.3.2.png)
 
