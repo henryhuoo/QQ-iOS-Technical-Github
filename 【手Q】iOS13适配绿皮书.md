@@ -142,11 +142,11 @@ UITabBar添加了一些排版约束，iOS13 beta版本中UITabBar出现过各种
 ### 1、背景
 今年，苹果提出了iOS13“现代化UI”的要求（即Modernizing Your UI for iOS13），“到2020年4月，所有App必须完成Flexible UI的适配”，具体内容包括：
 
-App启动画面必须使用Launch Storyboards处理。
+1、App启动画面必须使用Launch Storyboards处理。
 
-App必须适配所有尺寸的屏幕，以支持在任意设备尺寸上运行。
+2、App必须适配所有尺寸的屏幕，以支持在任意设备尺寸上运行。
 
-iPad App必须支持分屏多任务处理。
+3、iPad App必须支持分屏多任务处理。
 
 可参见：https://developer.apple.com/videos/play/wwdc2019/224/
 
@@ -168,7 +168,7 @@ Launch Storyboards方式实现启动图
 
 如果需要启动图的内容根据不同尺寸缩放或变化，只能利用Storyboard提供的SizeClass技术或设置约束来实现。（注：每调整一次StoryBoard所需资源时，建议重命名，否则偶尔会遇到启动图由于缓存原因不更新的情况）。
 
-4、附注
+### 4、附注
 ----
 
 由于苹果已在WWDC 2019明确要求：APP在2020年4月前必须支持布局自适应与iPad多任务。因此，手Q不仅是对iPad平台完成了兼容，更是为后续iPhone端支持更灵活的UI布局打好了基础。 
