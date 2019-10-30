@@ -7,7 +7,6 @@
 - 编译篇
 - UIKit篇
 - PhotoKit篇
-- Privacy篇
 - Crash篇
 
 前言
